@@ -1,6 +1,4 @@
 import React from 'react';
-import './App.css';
-import axios from 'axios';
 import styled from 'styled-components';
 
 // #f2970b - LARANJA
