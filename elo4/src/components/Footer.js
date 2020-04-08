@@ -42,7 +42,7 @@ class Footer extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <AppBar className={classes.footer} color="secondary">
+      <AppBar className={classes.footer} color="primary">
         <Toolbar className={classes.toolbar}>
           <Grid container>
             {/** Meios de pagamento */}
@@ -66,7 +66,7 @@ class Footer extends Component {
             {/** Redes Sociais */}
             <Grid container xs={6} spacing={16} justify="flex-end">
               <Grid item>
-                <Fab color="primary">
+                <Fab color="secondary">
                   <CardMedia
                     className={classes.socialMedia}
                     image={instagram}
@@ -74,12 +74,12 @@ class Footer extends Component {
                 </Fab>
               </Grid>
               <Grid item>
-                <Fab color="primary">
+                <Fab color="secondary">
                   <CardMedia className={classes.socialMedia} image={youtube} />
                 </Fab>
               </Grid>
               <Grid item>
-                <Fab color="primary">
+                <Fab color="secondary">
                   <CardMedia className={classes.socialMedia} image={facebook} />
                 </Fab>
               </Grid>
