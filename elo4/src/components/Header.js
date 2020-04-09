@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import cart from "../img/icones/carrinho-de-compras.png";
 import Button from "@material-ui/core/Button";
+import { Typography } from "@material-ui/core";
 
 class Header extends Component {
   render() {
@@ -24,10 +25,21 @@ class Header extends Component {
       <AppBar>
         <Toolbar className={classes.toolBar}>
           <Grid container justify="space-between" alignItems="center">
-            <Grid item>
-              <Button onClick={() => togglePage("store")} variant="text">
-                <img alt="logo" src={elo4logo} style={{ height: "48px" }} />
-              </Button>
+            <Grid item container alignItems="center" xs={5}>
+              <Grid item>
+                <Button onClick={() => togglePage("store")} variant="text">
+                  <img alt="logo" src={elo4logo} style={{ height: "48px" }} />
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={() => togglePage("form")}
+                  color="secondary"
+                  variant="outlined"
+                >
+                  <Typography>Adicionar Produto</Typography>
+                </Button>
+              </Grid>
             </Grid>
             {page === "store" && (
               <Grid item>
