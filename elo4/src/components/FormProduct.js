@@ -135,20 +135,22 @@ class FormProduct extends React.Component {
       photos: [this.state.productUrl],
       installments: this.state.parcell,
     };
-    try {
-      await axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
-        headers: {
-          "Content-Type": "application/json",
-          "api-token": ""
-        }
-      });
-
-      alert("Produto adicionado com sucesso!");
-    } catch (error) {
+    axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        "api-token": ""
+      }
+      }).then((response)=>{
+        alert("Produto adicionado com sucesso!");
+      }).catch ((error) => {
       alert("Erro ao adicionar o produto.");
-    }
-  }
+      });
+    };
+  };
+  
+
   render() {
+
     const { classes } = this.props;
 
     return (
@@ -286,8 +288,8 @@ class FormProduct extends React.Component {
           </Grid>
       </form>
     );
-  }
-}
+  };
+};
 
-;
+
 export default withStyles(styles)(FormProduct);
