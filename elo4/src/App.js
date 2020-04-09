@@ -6,6 +6,125 @@ import Store from "./components/Store";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import FormProduct from "./components/FormProduct";
+import api from "./services/api";
+
+class App extends Component {
+  state = {
+    productList: [
+      {
+        id: "Q8cybKtKmAEQphrXccQO",
+        paymentMethod: "card",
+        photos: ["https://picsum.photos/300/200"],
+        name: "Produto",
+        installments: 3,
+        category: "Categoria 1",
+        price: 10,
+        description: "Esse é um produto muito legal!",
+      },
+    ],
+    cartList: [],
+    page: "store",
+    searchInput: "",
+  };
+
+  // componentDidMount() {
+  //   api
+  //     .get("products")
+  //     .then((response) => {
+  //       console.log(response);
+  //       this.setState({
+  //         productList: response.data.products,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       alert(err);
+  //     });
+  // }
+
+  addToCart = (product) => {
+    let cartProduct = this.state.cartList.find((p) => p.id === product.id);
+
+    if (cartProduct) {
+      cartProduct.amount++;
+    } else {
+      cartProduct = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        photo: product.photos[0],
+        amount: 1,
+      };
+      this.state.cartList.push(cartProduct);
+    }
+
+    this.setState({
+      cartList: [...this.state.cartList],
+    });
+  };
+
+  handleChangeAmount = (id, val) => {
+    if (val < 0) {
+      let cartProduct = this.state.cartList.find((p) => p.id === id);
+      if (cartProduct.amount <= -val) {
+        this.setState({
+          cartList: this.state.cartList.filter((product) => product.id !== id),
+        });
+        return;
+      }
+    }
+
+    this.setState({
+      cartList: this.state.cartList.map((product) =>
+        product.id === id
+          ? { ...product, amount: product.amount + val }
+          : product
+      ),
+    });
+  };
+
+  handleSearchChange = (event) => {
+    this.setState({
+      searchInput: event.target.value,
+    });
+  };
+
+  togglePage = (val) => {
+    this.setState({
+      page: val,
+    });
+  };
+
+  render() {
+    const { page, productList, cartList, searchInput } = this.state;
+
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Container>
+          <Header
+            searchInput={searchInput}
+            page={page}
+            handleSearchChange={this.handleSearchChange}
+            togglePage={this.togglePage}
+          />
+          {page === "cart" ? (
+            <Cart
+              cartList={cartList}
+              handleChangeAmount={this.handleChangeAmount}
+            />
+          ) : (
+            <Store
+              searchInput={searchInput}
+              productList={productList}
+              addToCart={this.addToCart}
+            />
+          )}
+          <Footer />
+        </Container>
+      </MuiThemeProvider>
+    );
+  }
+}
+
 
 const theme = createMuiTheme({
   palette: {
@@ -32,40 +151,8 @@ const Container = styled.div`
   padding: 72px 8px 108px 8px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
-
-
-class App extends React.Component {
-  state = {
-    onCart: false,
-  };
-
-  toggleCart = (val) => {
-    this.setState({
-      onCart: val,
-    });
-  };
-
-  render() {
-    const { onCart } = this.state;
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Container>
-          <Header toggleCart={this.toggleCart} />
-           {/* {onCart ? <Cart /> : <Store />} */}
-          <FormProduct/>
-          <Footer />
-        </Container>
-      </MuiThemeProvider>
-    );
-  }
-}
-
-
-
-
 
 export default App;

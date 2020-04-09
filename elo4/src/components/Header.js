@@ -12,34 +12,44 @@ import Button from "@material-ui/core/Button";
 
 class Header extends Component {
   render() {
-    const { classes, toggleCart } = this.props;
+    const {
+      classes,
+      togglePage,
+      page,
+      handleSearchChange,
+      searchInput,
+    } = this.props;
 
     return (
       <AppBar>
         <Toolbar className={classes.toolBar}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <Button onClick={() => toggleCart(false)} variant="text">
+              <Button onClick={() => togglePage("store")} variant="text">
                 <img alt="logo" src={elo4logo} style={{ height: "48px" }} />
               </Button>
             </Grid>
-            <Grid item>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
+            {page === "store" && (
+              <Grid item>
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    value={searchInput}
+                    placeholder="Search…"
+                    onChange={handleSearchChange}
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                  />
                 </div>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                />
-              </div>
-            </Grid>
+              </Grid>
+            )}
             <Grid item>
               <Button
-                onClick={() => toggleCart(true)}
+                onClick={() => togglePage("cart")}
                 color="secondary"
                 variant="fab"
               >
