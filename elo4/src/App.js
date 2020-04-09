@@ -7,35 +7,6 @@ import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import FormProduct from "./components/FormProduct";
 
-class App extends Component {
-  state = {
-    onCart: false,
-  };
-
-  toggleCart = (val) => {
-    this.setState({
-      onCart: val,
-    });
-  };
-
-  render() {
-    const { onCart } = this.state;
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Container>
-          <Header toggleCart={this.toggleCart} />
-          {onCart ? <Cart /> : <Store />}
-          <Footer />
-        </Container>
-      </MuiThemeProvider>
-    );
-  }
-}
-
-
-
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -65,20 +36,36 @@ const Container = styled.div`
   align-items: center;
 `;
 
-class App extends Component {
+
+class App extends React.Component {
+  state = {
+    onCart: false,
+  };
+
+  toggleCart = (val) => {
+    this.setState({
+      onCart: val,
+    });
+  };
+
   render() {
+    const { onCart } = this.state;
+
     return (
       <MuiThemeProvider theme={theme}>
         <Container>
-          <Header />
-          {/* <Store /> */}
-          <Footer /> 
+          <Header toggleCart={this.toggleCart} />
+          {/* {onCart ? <Cart /> : <Store />} */}
           <FormProduct/>
+          <Footer />
         </Container>
       </MuiThemeProvider>
     );
   }
 }
+
+
+
 
 
 export default App;

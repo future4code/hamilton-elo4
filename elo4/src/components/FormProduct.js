@@ -136,6 +136,7 @@ class FormProduct extends React.Component {
       photos: [this.state.productUrl],
       installments: this.state.parcell,
     };
+
      axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
         headers: {
           "Content-Type": "application/json",          
@@ -148,6 +149,7 @@ class FormProduct extends React.Component {
   };
  
   render() {
+
     const { classes } = this.props;
 
     return (
@@ -285,8 +287,8 @@ class FormProduct extends React.Component {
           </Grid>
       </form>
     );
-  }
-}
+  };
+};
 
-;
+
 export default withStyles(styles)(FormProduct);
