@@ -55,7 +55,7 @@ class App extends React.Component {
       <MuiThemeProvider theme={theme}>
         <Container>
           <Header toggleCart={this.toggleCart} />
-          {/* {onCart ? <Cart /> : <Store />} */}
+           {/* {onCart ? <Cart /> : <Store />} */}
           <FormProduct/>
           <Footer />
         </Container>

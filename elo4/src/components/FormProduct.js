@@ -203,7 +203,7 @@ class FormProduct extends React.Component {
           <TextField
             id="forma-pagamento"
             select 
-            label="Forma de pagamento"
+            label=""
             className={classes.textField}
             value={this.state.paymentMethod}
             onChange={this.handleChange('paymentMethod')}
@@ -255,6 +255,7 @@ class FormProduct extends React.Component {
             value={this.state.productUrl}
             onChange={this.handleChange('productUrl')}
             className={classes.textField}
+            style={{ width: 500 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -267,10 +268,11 @@ class FormProduct extends React.Component {
             id="descrição-do-produto"
             label="Descrição do produto"
             multiline
-            rowsMax="4"
+            rowsMax="8"
             value={this.state.productDescription}
             onChange={this.handleChange('productDescription')}
             className={classes.textField}
+            style={{ width: 500 }}
             margin="normal"
             helperText="Faça uma descrição detalhada do produto"
             variant="outlined"
