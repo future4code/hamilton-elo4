@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Store from "./components/Store";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
+import FormProduct from "./components/FormProduct";
 
 class App extends Component {
   state = {
@@ -32,6 +33,9 @@ class App extends Component {
   }
 }
 
+
+
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -55,11 +59,26 @@ const Container = styled.div`
   min-height: 100vh;
   box-sizing: border-box;
   padding: 72px 8px 108px 8px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
+
+class App extends Component {
+  render() {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Container>
+          <Header />
+          {/* <Store /> */}
+          <Footer /> 
+          <FormProduct/>
+        </Container>
+      </MuiThemeProvider>
+    );
+  }
+}
+
 
 export default App;
