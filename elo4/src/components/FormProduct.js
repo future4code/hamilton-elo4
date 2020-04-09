@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Styled from "styled-components";
+import axios from 'axios';
 
 const styles = theme => ({
   container: {
@@ -135,19 +136,18 @@ class FormProduct extends React.Component {
       photos: [this.state.productUrl],
       installments: this.state.parcell,
     };
-    try {
-      await axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
+     axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
         headers: {
           "Content-Type": "application/json",
-          "api-token": ""
+          "api-token": "ana-hamilton",
         }
-      });
-
-      alert("Produto adicionado com sucesso!");
-    } catch (error) {
-      alert("Erro ao adicionar o produto.");
-    }
-  }
+      }).then((response)=>{
+        alert("Produto adicionado com sucesso!");
+      }).catch ((error)=> {
+        alert("Erro ao adicionar o produto.");
+      })
+  };
+ 
   render() {
     const { classes } = this.props;
 
