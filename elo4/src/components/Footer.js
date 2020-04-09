@@ -8,10 +8,8 @@ import visa from "../img/icones/visa.png";
 import mastercard from "../img/icones/mastercard.png";
 import CardMedia from "@material-ui/core/CardMedia";
 import Paper from "@material-ui/core/Paper";
-import youtube from "../img/icones/youtube.png";
-import instagram from "../img/icones/instagram.png";
-import facebook from "../img/icones/facebook.png";
 import Fab from "@material-ui/core/Fab";
+import { Instagram, Facebook, YouTube } from "@material-ui/icons/";
 
 const styles = {
   footer: {
@@ -42,7 +40,7 @@ class Footer extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <AppBar className={classes.footer} color="secondary">
+      <AppBar className={classes.footer} color="primary">
         <Toolbar className={classes.toolbar}>
           <Grid container>
             {/** Meios de pagamento */}
@@ -66,21 +64,18 @@ class Footer extends Component {
             {/** Redes Sociais */}
             <Grid container xs={6} spacing={16} justify="flex-end">
               <Grid item>
-                <Fab color="primary">
-                  <CardMedia
-                    className={classes.socialMedia}
-                    image={instagram}
-                  />
+                <Fab color="secondary">
+                  <YouTube />
                 </Fab>
               </Grid>
               <Grid item>
-                <Fab color="primary">
-                  <CardMedia className={classes.socialMedia} image={youtube} />
+                <Fab color="secondary">
+                  <Instagram />
                 </Fab>
               </Grid>
               <Grid item>
-                <Fab color="primary">
-                  <CardMedia className={classes.socialMedia} image={facebook} />
+                <Fab color="secondary">
+                  <Facebook />
                 </Fab>
               </Grid>
             </Grid>
