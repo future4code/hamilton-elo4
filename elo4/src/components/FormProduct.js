@@ -91,11 +91,7 @@ class FormProduct extends React.Component {
       [category]: event.target.value,
     });
   };
-  handleChange = parcell => event => {
-    this.setState({
-      [parcell]: event.target.value,
-    });
-  };
+
   handleChange = productValue => event => {
     this.setState({
       [productValue]: event.target.value,
@@ -106,7 +102,12 @@ class FormProduct extends React.Component {
       [paymentMethod]: event.target.value,
     });
   };
-    handleChange = productDescription => event => {
+  handleChange = parcell => event => {
+    this.setState({
+      [parcell]: event.target.value,
+    });
+  };
+  handleChange = productDescription => event => {
     this.setState({
       [productDescription]: event.target.value,
     });
