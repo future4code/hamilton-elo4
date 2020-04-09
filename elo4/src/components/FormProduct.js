@@ -12,6 +12,8 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    justify: 'center',
+    alignItems: 'center,'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -21,7 +23,12 @@ const styles = theme => ({
     marginTop: 16,
   },
   menu: {
-    width: 200,
+    width: 220,
+  },
+  button: {
+    margin: theme.spacing.unit,
+    padding: 8,
+    height: 50,
   },
 });
 
@@ -73,6 +80,7 @@ class FormProduct extends React.Component {
     productValue: undefined,
     paymentMethod: undefined,
     productDescription: '',
+    productUrl: '',
     
   };
 
@@ -107,6 +115,11 @@ class FormProduct extends React.Component {
       [parcell]: event.target.value,
     });
   };
+  handleChange = productUrl => event => {
+    this.setState({
+      [productUrl]: event.target.value,
+    });
+  };
   handleChange = productDescription => event => {
     this.setState({
       [productDescription]: event.target.value,
@@ -117,101 +130,136 @@ class FormProduct extends React.Component {
 
     return (
       <form className={classes.container} noValidate autoComplete="off">
+        <Grid container
+          direction="column"
+          justify="center"
+          alignItems="center">
+          <h2>Cadatro de produtos</h2>
+          <p>Seja bem vindo ao Elo4, nós estamos aqui para facilitar o caminho do seu produto até o seu cliente.</p>
+          <p>Nosso cadastro é simples e rápido, você só precisa preencher os dados deste formulário e o seu produto já vai estar disponível para milhares de pessoas.</p>
+        </Grid>
+        <Grid container
+          direction="column"
+          justify="center"
+          alignItems="center">
+          <TextField
+            id="outlined-name-do-produto"
+            label="Nome do produto"
+            className={classes.textField}
+            value={this.state.productName}
+            onChange={this.handleChange('productName')}
+            helperText="Faça uma descrição simples do produto"
+            margin="normal"
+            variant="outlined"
+          />
+
+          <TextField
+            id="categoria"
+            select 
+            label="Categoria"
+            className={classes.textField}
+            value={this.state.category}
+            onChange={this.handleChange('category')}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu,
+              },
+            }}
+            helperText="Selecione a categoria"
+            margin="normal"
+            variant="outlined"
+          >
+            {currencies.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         
-        <TextField
-          id="outlined-name-do-produto"
-          label="Nome do produto"
-          className={classes.textField}
-          value={this.state.productName}
-          onChange={this.handleChange('productName')}
-          helperText="Faça uma descrição simples do produto"
-          margin="normal"
-          variant="outlined"
-        />
+          <TextField
+            id="forma-pagamento"
+            select 
+            label="Forma de pagamento"
+            className={classes.textField}
+            value={this.state.paymentMethod}
+            onChange={this.handleChange('paymentMethod')}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu,
+              },
+            }}
+            helperText="Selecione a forma de pagamento"
+            margin="normal"
+            variant="outlined"
+          >
+            {payments.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        
+          <TextField
+            id="preço-do-produto"
+            label="Preço do produto"
+            className={classes.textField}
+            value={this.state.productValue}
+            onChange={this.handleChange('productValue')}
+            type="number"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+            variant="outlined"
+          />
+        
+          <TextField
+            id="parcelas"
+            label="Parcelas"
+            className={classes.textField}
+            value={this.state.parcell}
+            onChange={this.handleChange('parcell')}
+            helperText="Defina a quantidade de parcelas de 1 a 5"
+            margin="normal"
+            variant="outlined"
+          />
 
-        <TextField
-          id="categoria"
-          select 
-          label="Categoria"
-          className={classes.textField}
-          value={this.state.category}
-          onChange={this.handleChange('category')}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu,
-            },
-          }}
-          helperText="Selecione a categoria"
-          margin="normal"
-          variant="outlined"
-        >
-          {currencies.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+          <TextField
+            id="url-do-produto"
+            label="Link da foto do produto"
+            value={this.state.productUrl}
+            onChange={this.handleChange('productUrl')}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            helperText=""
+            margin="normal"
+            variant="outlined"
+          />
 
-        <TextField
-          id="forma-pagamento"
-          select 
-          label="Forma de pagamento"
-          className={classes.textField}
-          value={this.state.paymentMethod}
-          onChange={this.handleChange('paymentMethod')}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu,
-            },
-          }}
-          helperText="Selecione a forma de pagamento"
-          margin="normal"
-          variant="outlined"
-        >
-          {payments.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-       
-        <TextField
-          id="preço-do-produto"
-          label="Preço do produto"
-          value={this.state.productValue}
-          onChange={this.handleChange('productValue')}
-          type="number"
-          className={classes.textField}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          margin="normal"
-          variant="outlined"
-        />
-
-        <TextField
-          id="parcelas"
-          label="Parcelas"
-          className={classes.textField}
-          value={this.state.parcell}
-          onChange={this.handleChange('parcell')}
-          helperText="Defina a quantidade de parcelas de 1 a 5"
-          margin="normal"
-          variant="outlined"
-        />
-
-        <TextField
-          id="descrição-do-produto"
-          label="Descrição do produto"
-          multiline
-          rowsMax="4"
-          value={this.state.productDescription}
-          onChange={this.handleChange('productDescription')}
-          className={classes.textField}
-          margin="normal"
-          helperText="Faça uma descrição detalhada do produto"
-          variant="outlined"
-        />
+          <TextField
+            id="descrição-do-produto"
+            label="Descrição do produto"
+            multiline
+            rowsMax="4"
+            value={this.state.productDescription}
+            onChange={this.handleChange('productDescription')}
+            className={classes.textField}
+            margin="normal"
+            helperText="Faça uma descrição detalhada do produto"
+            variant="outlined"
+          />
+        
+          <Button 
+          size="medium"
+          variant="contained" 
+          color="primary" 
+          className={classes.button}>
+          Adicionar produto
+          </Button>
+          </Grid>
       </form>
     );
   }
