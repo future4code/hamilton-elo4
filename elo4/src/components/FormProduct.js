@@ -125,6 +125,29 @@ class FormProduct extends React.Component {
       [productDescription]: event.target.value,
     });
   };
+  AddProduct = () => {
+    const body = {
+      name: this.state.name,
+      description: this.state.productDescription,
+      price: this.state.productValue,
+      paymentMethod: this.state.paymentMethod,
+      category: this.state.category,
+      photos: [this.state.productUrl],
+      installments: this.state.parcell,
+    };
+    try {
+      await axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
+        headers: {
+          "Content-Type": "application/json",
+          "api-token": ""
+        }
+      });
+
+      alert("Produto adicionado com sucesso!");
+    } catch (error) {
+      alert("Erro ao adicionar o produto.");
+    }
+  }
   render() {
     const { classes } = this.props;
 
@@ -256,7 +279,8 @@ class FormProduct extends React.Component {
           size="medium"
           variant="contained" 
           color="primary" 
-          className={classes.button}>
+          className={classes.button}
+          onClick={this.AddProduct}>
           Adicionar produto
           </Button>
           </Grid>
