@@ -4,6 +4,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import styled from "styled-components";
 import Store from "./components/Store";
 import Footer from "./components/Footer";
+import FormProduct from "./components/FormProduct";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,8 +37,9 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Container>
           <Header />
-          <Store />
-          <Footer />
+          {/* <Store /> */}
+          <Footer /> 
+          <FormProduct/>
         </Container>
       </MuiThemeProvider>
     );
