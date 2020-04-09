@@ -138,8 +138,7 @@ class FormProduct extends React.Component {
     };
      axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
         headers: {
-          "Content-Type": "application/json",
-          "api-token": "ana-hamilton",
+          "Content-Type": "application/json",          
         }
       }).then((response)=>{
         alert("Produto adicionado com sucesso!");
