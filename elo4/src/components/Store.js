@@ -29,7 +29,8 @@ class Store extends Component {
                 product.name.toUpperCase().indexOf(searchInput.toUpperCase()) >
                   -1 &&
                 (this.state.categoryFilter === "todos" ||
-                  product.category === this.state.categoryFilter)
+                  product.category.toUpperCase() ===
+                    this.state.categoryFilter.toUpperCase())
             )
             .map((product) => (
               <StoreProduct
