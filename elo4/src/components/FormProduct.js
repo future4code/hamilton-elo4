@@ -91,6 +91,7 @@ class FormProduct extends React.Component {
       [category]: event.target.value,
     });
   };
+
   handleChange = productValue => event => {
     this.setState({
       [productValue]: event.target.value,
@@ -194,7 +195,7 @@ class FormProduct extends React.Component {
           className={classes.textField}
           value={this.state.parcell}
           onChange={this.handleChange('parcell')}
-          helperText="Defina a quantia de parcelas"
+          helperText="Defina a quantidade de parcelas de 1 a 5"
           margin="normal"
           variant="outlined"
         />
