@@ -16,6 +16,10 @@ const styles = {
   actions: {
     justifyContent: "center",
   },
+  cardTitle: {
+    display: "flex",
+    justifyContent: "center;",
+  },
 };
 
 class StoreProduct extends Component {
@@ -25,6 +29,9 @@ class StoreProduct extends Component {
     return (
       <Grid item xs={4}>
         <Card>
+          <CardContent className={classes.cardTitle}>
+            <Typography variant="title">Pokemon Pillow</Typography>
+          </CardContent>
           <CardMedia
             className={classes.media}
             image={img}

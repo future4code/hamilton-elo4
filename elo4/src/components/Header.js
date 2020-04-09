@@ -12,14 +12,16 @@ import Button from "@material-ui/core/Button";
 
 class Header extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, toggleCart } = this.props;
 
     return (
       <AppBar>
         <Toolbar className={classes.toolBar}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <img src={elo4logo} style={{ height: "48px" }} />
+              <Button onClick={() => toggleCart(false)} variant="text">
+                <img alt="logo" src={elo4logo} style={{ height: "48px" }} />
+              </Button>
             </Grid>
             <Grid item>
               <div className={classes.search}>
@@ -36,8 +38,12 @@ class Header extends Component {
               </div>
             </Grid>
             <Grid item>
-              <Button color="secondary" variant="fab">
-                <img src={cart} style={{ height: "36px" }} />
+              <Button
+                onClick={() => toggleCart(true)}
+                color="secondary"
+                variant="fab"
+              >
+                <img alt="cart" src={cart} style={{ height: "36px" }} />
               </Button>
             </Grid>
           </Grid>

@@ -8,10 +8,8 @@ import visa from "../img/icones/visa.png";
 import mastercard from "../img/icones/mastercard.png";
 import CardMedia from "@material-ui/core/CardMedia";
 import Paper from "@material-ui/core/Paper";
-import youtube from "../img/icones/youtube.png";
-import instagram from "../img/icones/instagram.png";
-import facebook from "../img/icones/facebook.png";
 import Fab from "@material-ui/core/Fab";
+import { Instagram, Facebook, YouTube } from "@material-ui/icons/";
 
 const styles = {
   footer: {
@@ -67,20 +65,17 @@ class Footer extends Component {
             <Grid container xs={6} spacing={16} justify="flex-end">
               <Grid item>
                 <Fab color="secondary">
-                  <CardMedia
-                    className={classes.socialMedia}
-                    image={instagram}
-                  />
+                  <YouTube />
                 </Fab>
               </Grid>
               <Grid item>
                 <Fab color="secondary">
-                  <CardMedia className={classes.socialMedia} image={youtube} />
+                  <Instagram />
                 </Fab>
               </Grid>
               <Grid item>
                 <Fab color="secondary">
-                  <CardMedia className={classes.socialMedia} image={facebook} />
+                  <Facebook />
                 </Fab>
               </Grid>
             </Grid>
