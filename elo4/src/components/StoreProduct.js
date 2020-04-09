@@ -24,25 +24,25 @@ const styles = {
 
 class StoreProduct extends Component {
   render() {
-    const { classes, img } = this.props;
+    const { classes, product, addToCart } = this.props;
 
     return (
       <Grid item xs={4}>
         <Card>
           <CardContent className={classes.cardTitle}>
-            <Typography variant="title">Pokemon Pillow</Typography>
+            <Typography variant="title">{product.name}</Typography>
           </CardContent>
           <CardMedia
             className={classes.media}
-            image={img}
+            image={product.photos[0]}
             title="Contemplative Reptile"
           />
           <CardContent>
-            <Typography variant="title">R$10,00</Typography>
+            <Typography variant="title">R${product.price},00</Typography>
             <Typography variant="caption">10x R$1,00 sem juros</Typography>
           </CardContent>
           <CardActions className={classes.actions}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={addToCart}>
               Adicionar ao Carrinho
             </Button>
           </CardActions>

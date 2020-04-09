@@ -1,22 +1,33 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import CartProduct from "./CartProduct";
 
 class Cart extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, cartList, handleChangeAmount } = this.props;
+
+    const total = cartList.reduce(
+      (total, product) => total + product.price * product.amount,
+      0
+    );
+
     return (
       <Container>
         <Grid container className={classes.grid} direction="column">
-          <CartProduct />
-          <CartProduct />
-          <CartProduct />
-          <CartProduct />
-          <CartProduct />
+          {cartList.map((product) => (
+            <CartProduct
+              key={product.id}
+              product={product}
+              handleChangeAmount={handleChangeAmount}
+            />
+          ))}
         </Grid>
-        <CartData></CartData>
+        <CartData>
+          <Typography variant="display1">Total: R${total},00</Typography>
+        </CartData>
       </Container>
     );
   }
@@ -46,6 +57,10 @@ const CartData = styled.div`
   border-top: 2px solid black;
   height: 200px;
   flex: none;
+
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 32px;
 `;
 
 export default withStyles(styles)(Cart);

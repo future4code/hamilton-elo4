@@ -5,31 +5,30 @@ import Typography from "@material-ui/core/Typography";
 
 export default class SideMenu extends Component {
   render() {
-    const { xs } = this.props;
+    const { xs, handleChangeCategoryFilter } = this.props;
+
+    const categories = [
+      "todos",
+      "artigos para festas",
+      "objetos de decoração",
+      "bijuterias",
+      "produtos religiosos",
+      "enxovais",
+      "acessórios eco-friendly",
+    ];
 
     return (
       <Grid xs={xs} item container direction="column">
         <Grid item>
           <Typography variant="h5">Categorias</Typography>
         </Grid>
-        <Grid item>
-          <Button>artigos para festas</Button>
-        </Grid>
-        <Grid item>
-          <Button>objetos de decoração</Button>
-        </Grid>
-        <Grid item>
-          <Button>bijuterias</Button>
-        </Grid>
-        <Grid item>
-          <Button> produtos religiosos</Button>
-        </Grid>
-        <Grid item>
-          <Button>enxovais</Button>
-        </Grid>
-        <Grid item>
-          <Button>acessórios eco-friendly</Button>
-        </Grid>
+        {categories.map((category) => (
+          <Grid item key={category}>
+            <Button onClick={() => handleChangeCategoryFilter(category)}>
+              {category}
+            </Button>
+          </Grid>
+        ))}
       </Grid>
     );
   }
