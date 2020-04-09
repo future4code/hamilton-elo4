@@ -10,36 +10,25 @@ import api from "./services/api";
 
 class App extends Component {
   state = {
-    productList: [
-      {
-        id: "Q8cybKtKmAEQphrXccQO",
-        paymentMethod: "card",
-        photos: ["https://picsum.photos/300/200"],
-        name: "Produto",
-        installments: 3,
-        category: "Categoria 1",
-        price: 10,
-        description: "Esse é um produto muito legal!",
-      },
-    ],
+    productList: [],
     cartList: [],
     page: "store",
     searchInput: "",
   };
 
-  // componentDidMount() {
-  //   api
-  //     .get("products")
-  //     .then((response) => {
-  //       console.log(response);
-  //       this.setState({
-  //         productList: response.data.products,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // }
+  componentDidMount() {
+    api
+      .get("products")
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          productList: response.data.products,
+        });
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
 
   addToCart = (product) => {
     let cartProduct = this.state.cartList.find((p) => p.id === product.id);
@@ -97,6 +86,28 @@ class App extends Component {
   render() {
     const { page, productList, cartList, searchInput } = this.state;
 
+    const defPage = () => {
+      switch (page) {
+        case "cart":
+          return (
+            <Cart
+              cartList={cartList}
+              handleChangeAmount={this.handleChangeAmount}
+            />
+          );
+        case "form":
+          return <FormProduct />;
+        default:
+          return (
+            <Store
+              searchInput={searchInput}
+              productList={productList}
+              addToCart={this.addToCart}
+            />
+          );
+      }
+    };
+
     return (
       <MuiThemeProvider theme={theme}>
         <Container>
@@ -106,25 +117,13 @@ class App extends Component {
             handleSearchChange={this.handleSearchChange}
             togglePage={this.togglePage}
           />
-          {page === "cart" ? (
-            <Cart
-              cartList={cartList}
-              handleChangeAmount={this.handleChangeAmount}
-            />
-          ) : (
-            <Store
-              searchInput={searchInput}
-              productList={productList}
-              addToCart={this.addToCart}
-            />
-          )}
+          {defPage()}
           <Footer />
         </Container>
       </MuiThemeProvider>
     );
   }
 }
-
 
 const theme = createMuiTheme({
   palette: {
