@@ -6,7 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import classNames from 'classnames';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import Styled from "styled-components";
+import axios from 'axios';
+
 
 const styles = theme => ({
   container: {
@@ -18,6 +19,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    
   },
   dense: {
     marginTop: 16,
@@ -125,6 +127,30 @@ class FormProduct extends React.Component {
       [productDescription]: event.target.value,
     });
   };
+
+  AddProduct = () => {
+    const body = {
+      name: this.state.name,
+      description: this.state.productDescription,
+      price: this.state.productValue,
+      paymentMethod: this.state.paymentMethod,
+      category: this.state.category,
+      photos: [this.state.productUrl],
+      installments: this.state.parcell,
+    };
+    try {
+      await axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
+        headers: {
+          "Content-Type": "application/json",
+          "api-token": ""
+        }
+      });
+
+      alert("Produto adicionado com sucesso!");
+    } catch (error) {
+      alert("Erro ao adicionar o produto.");
+    }
+  }
   render() {
     const { classes } = this.props;
 
@@ -135,7 +161,8 @@ class FormProduct extends React.Component {
           justify="center"
           alignItems="center">
           <h2>Cadatro de produtos</h2>
-          <p>Seja bem vindo ao Elo4, nós estamos aqui para facilitar o caminho do seu produto até o seu cliente.</p>
+          <p>Seja bem vindo ao Elo4!</p>
+          <p>Estamos aqui para facilitar o caminho do seu produto até o seu cliente.</p>
           <p>Nosso cadastro é simples e rápido, você só precisa preencher os dados deste formulário e o seu produto já vai estar disponível para milhares de pessoas.</p>
         </Grid>
         <Grid container
@@ -235,6 +262,7 @@ class FormProduct extends React.Component {
               shrink: true,
             }}
             helperText=""
+            style={{ width: 500 }}
             margin="normal"
             variant="outlined"
           />
@@ -243,7 +271,8 @@ class FormProduct extends React.Component {
             id="descrição-do-produto"
             label="Descrição do produto"
             multiline
-            rowsMax="4"
+            rowsMax="8"
+            style={{ width: 500 }}
             value={this.state.productDescription}
             onChange={this.handleChange('productDescription')}
             className={classes.textField}
@@ -256,7 +285,8 @@ class FormProduct extends React.Component {
           size="medium"
           variant="contained" 
           color="primary" 
-          className={classes.button}>
+          className={classes.button}
+          onClick={AddProduct}>
           Adicionar produto
           </Button>
           </Grid>
