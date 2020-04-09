@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import classNames from 'classnames';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import Styled from "styled-components";
 import axios from 'axios';
 
 const styles = theme => ({
@@ -74,22 +71,18 @@ const payments = [
 
 class FormProduct extends React.Component {
   state = {
-    name: '',
+    
     productName: '',
     category: '',
-    parcell: undefined,
-    productValue: undefined,
-    paymentMethod: undefined,
+    parcell: '',
+    productValue: '',
+    paymentMethod: '',
     productDescription: '',
     productUrl: '',
     
   };
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
+  
   handleChange = productName => event => {
     this.setState({
       [productName]: event.target.value,
@@ -128,7 +121,7 @@ class FormProduct extends React.Component {
   };
   AddProduct = () => {
     const body = {
-      name: this.state.name,
+      name: this.state.productName,
       description: this.state.productDescription,
       price: this.state.productValue,
       paymentMethod: this.state.paymentMethod,
@@ -137,11 +130,9 @@ class FormProduct extends React.Component {
       installments: this.state.parcell,
     };
 
-     axios.post(`https://us-central1-future-apis.cloudfunctions.net/elo4/products`, body, {
-        headers: {
-          "Content-Type": "application/json",          
-        }
-      }).then((response)=>{
+     axios.post('https://us-central1-future-apis.cloudfunctions.net/elo4/products', body
+        
+      ).then((response)=>{
         alert("Produto adicionado com sucesso!");
       }).catch ((error)=> {
         alert("Erro ao adicionar o produto.");
