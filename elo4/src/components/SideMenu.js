@@ -27,8 +27,33 @@ export default class SideMenu extends Component {
             <Button onClick={() => handleChangeCategoryFilter(category)}>
               {category}
             </Button>
-          </Grid>
+          </Grid>          
         ))}
+        <Grid>
+        <Typography variant="h5">Filtros</Typography>
+          <p>Valor Mínimo:</p>
+          <Grid>
+            <input
+              type="number"
+              min="0"
+              max="10000"
+              value={this.props.filtroMinimo}
+              onChange={this.onChangeFilterMin}
+              placeholder="Valor Mínimo"
+            />
+          </Grid>
+          <p>Valor Máximo:</p>
+          <Grid>
+            <input
+              type="number"
+              min="0"
+              max="10000"
+              value={this.props.filtroMaximo}
+              onChange={this.onChangeFilterMax}
+              placeholder="Valor Máximo"
+            />
+          </Grid>
+        </Grid>
       </Grid>
     );
   }
